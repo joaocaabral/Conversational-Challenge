@@ -1,0 +1,5 @@
+python-telegram-bot==20.5
+langchain
+openai
+requests
+python-dotenv
