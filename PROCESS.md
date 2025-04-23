@@ -1,9 +1,8 @@
 
 ---
 
-### 3. 🧾 `PROCESSO.md` inicial
+### 🧾 `PROCESSO.md` inicial
 
-```markdown
 # Documentação do Processo – Conversational Challenge
 
 ## 🎯 Objetivo
