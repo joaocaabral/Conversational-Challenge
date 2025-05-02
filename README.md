@@ -69,27 +69,40 @@ Procfile
 
 ---
 
-## 🧠 Como o FURIOSO pensa
-
-O FURIOSO responde como um torcedor de verdade:
-- Nunca se identifica como IA
-- Só usa informações confirmadas
-- Se for uma pergunta de opinião, ele inventa como qualquer torcedor faria
-- Se não souber, assume que ainda não saiu notícia
-- Usa emojis e expressões do dia a dia com moderação e estilo
-
-Exemplo de resposta factual:
-```
-FalleN, YEKINDAR, molodoy, yuurih e KSCERATO. E o comandante é o guerri. Line pesada demais.
-```
-
-Exemplo de opinião:
-```
-O Fallen, sem dúvidas. É o professor, né? Representa tudo que a FURIA virou hoje.
-```
-
----
-
 ## 🤝 Sobre
 
-Este projeto foi desenvolvido como parte de um desafio técnico para a FURIA.  
+Este projeto foi desenvolvido por mim como parte de um desafio técnico para a FURIA Esports.
+
+A proposta era criar uma experiência conversacional voltada para fãs da organização, com tom torcedor e linguagem natural.
+
+### 🔧 Como o bot funciona por dentro
+
+1. **Classificação da pergunta**  
+   Cada mensagem recebida é analisada por um modelo de linguagem (via OpenRouter) para determinar:
+   - Se é factual, subjetiva ou precisa buscar na web
+   - Qual modalidade está sendo mencionada (CS2, Valorant, LoL, R6, geral)
+
+2. **Respostas subjetivas**  
+   Quando a pergunta é de opinião, o bot gera diretamente uma resposta como personagem, no estilo do torcedor “FURIOSO”, com tom apaixonado, informal e espontâneo.
+
+3. **Respostas factuais**  
+   Se a pergunta for objetiva e coberta pela base local (`base.json`), a resposta é recuperada de lá imediatamente.
+
+4. **Busca na web (com precisão)**  
+   Se a resposta precisa ser atualizada:
+   - A pergunta é otimizada para ser mais específica (ex: “lineup atual da FURIA no CS2”)
+   - É feita uma busca via Tavily, priorizando links definidos manualmente no `base.json` (como páginas da Liquipedia e da Ubisoft)
+   - O conteúdo retornado é passado por uma segunda IA que organiza e interpreta os dados
+   - Em seguida, uma terceira IA responde ao fã no estilo torcedor, com base nesse conteúdo
+
+5. **Histórico e contexto**  
+   O bot inicialmente usava contexto de conversas anteriores, mas após testes removi essa funcionalidade para evitar confusões. Agora ele interpreta cada pergunta de forma isolada, o que tornou as respostas mais precisas.
+
+### 🧱 Estrutura modular e escalável
+
+- Toda a lógica está separada em arquivos específicos (classificação, busca, resposta)
+- Os prompts estão centralizados num único `prompts.json`, o que facilita ajustes e iteração
+- As fontes confiáveis estão no `base.json`, permitindo atualizar os links sem mexer no código
+- O deploy está configurado para rodar 24h/dia no Railway
+
+---
