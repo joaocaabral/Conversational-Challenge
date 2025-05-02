@@ -1,125 +1,95 @@
-# 🤖 FURIOSO Bot - Desafio Conversacional FURIA
+# 🦁 FURIOSO Bot — o torcedor mais fanático da FURIA
 
-Este projeto é a entrega do **Desafio Técnico #1 - Experiência Conversacional** para a vaga de Assistente de Engenharia de Software na FURIA Tech.
+Este é o FURIOSO, um bot que eu desenvolvi para responder torcedores da FURIA Esports no Telegram. Ele conversa como um verdadeiro torcedor: com paixão, informalidade e resenha  como se estivesse num grupo de WhatsApp da torcida. O objetivo foi criar uma experiência conversacional que mistura informação atualizada com o jeitão raiz da comunidade da FURIA.
 
-O bot simula um torcedor fanático da FURIA, o **FURIOSO**, que interage com outros fãs no Telegram com informações atualizadas, resenha e paixão pelos times.
-
----
-
-## 🎯 Objetivo
-
-Criar um bot conversacional para torcedores da FURIA Esports, com foco no time de **CS2**, mas também cobrindo Valorant, R6, LoL, campanhas históricas e produtos.
+👉 Teste aqui: [@Furios0Bot](https://t.me/Furios0Bot)
 
 ---
 
-## ✅ Funcionalidades
+## ✨ O que o FURIOSO faz
 
-- Bot Telegram funcional com linguagem de torcida  
-- Respostas com gírias, emoção e emojis  
-- Consulta rápida a conhecimento fixo (lineups, títulos, técnicos)  
-- Busca em tempo real com **Tavily API**  
-- Geração de respostas via **OpenRouter API**  
-- Fallbacks opinativos para perguntas subjetivas  
-- Modular, escalável e fácil de manter  
-
----
-
-## 📦 Estrutura de Pastas
-
-```
-Conversational-Challenge/
-├── .env.example
-├── requirements.txt
-├── README.md
-├── conhecimento/
-│   └── base.json
-├── prompt/
-│   └── torcedor_prompt.txt
-├── src/
-│   ├── main.py
-│   ├── agent.py
-│   ├── conhecimento.py
-│   ├── search_web.py
-│   └── util.py
-```
+- Responde perguntas sobre os times da FURIA (CS2, Valorant, LoL, R6)
+- Consulta escalações, técnicos, reforços e histórico
+- Traz informações atualizadas usando fontes como Liquipedia, Ubisoft, redes sociais oficiais
+- Informa sobre próximos jogos com o comando `/agenda`
+- Solta frases de resenha com `/resenha`
+- Sugere perguntas com o comando `/menu`
+- Classifica automaticamente se a pergunta é factual, subjetiva ou exige busca
+- Fala como torcedor — sem parecer robô, sem se identificar como IA
 
 ---
 
-## 🚀 Como rodar
+## ⚙️ Tecnologias usadas
 
-### 1. Clone o projeto
+- Python 3.10+
+- [python-telegram-bot](https://github.com/python-telegram-bot/python-telegram-bot)
+- Tavily API (busca na web)
+- OpenRouter (modelo de linguagem via API)
+- Railway (para manter o bot online gratuitamente)
+
+---
+
+## 📦 Como rodar localmente (Caso queira)
+
+### 1. Clone o repositório
 
 ```bash
-git clone https://github.com/seunome/furioso-bot.git
-cd furioso-bot
+git clone https://github.com/seu-usuario/Conversational-Challenge.git
+cd Conversational-Challenge
 ```
 
-### 2. Crie um arquivo `.env` com suas chaves
-
-Crie um arquivo chamado `.env` na raiz do projeto com o seguinte conteúdo (ou use o `.env.example` como base):
-
-```env
-OPENROUTER_API_KEY=sk-or-xxxxxxxxxxxxxxxxxxxx
-TAVILY_API_KEY=tvly-xxxxxxxxxxxxxxxxxxxx
-TELEGRAM_TOKEN=123456789:ABCDEF_seu_token_aqui
-```
-
-### 3. Instale as dependências
-
-Se estiver usando ambiente virtual (recomendado):
+### 2. Instale as dependências
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # no Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 4. Execute o bot
+### 3. Rode o bot
 
 ```bash
 python src/main.py
 ```
 
-Ao iniciar, o terminal mostrará:
+---
+
+## 📁 Estrutura do projeto
 
 ```
-🔥 Bot está rodando... Ctrl+C para parar.
+src/
+├── main.py              # Entrada do bot no Telegram
+├── agent.py             # Inteligência do bot (classificação, busca, resposta)
+├── context.py           # Histórico de mensagens por usuário
+├── search_web.py        # Integração com Tavily
+├── base.json            # Fontes confiáveis (urls específicas)
+├── prompts.json         # Todos os prompts usados pela IA
+requirements.txt
+Procfile
+.env
 ```
 
-Agora é só abrir o Telegram e conversar com o seu FURIOSO 🦍🔥
+---
+
+## 🧠 Como o FURIOSO pensa
+
+O FURIOSO responde como um torcedor de verdade:
+- Nunca se identifica como IA
+- Só usa informações confirmadas
+- Se for uma pergunta de opinião, ele inventa como qualquer torcedor faria
+- Se não souber, assume que ainda não saiu notícia
+- Usa emojis e expressões do dia a dia com moderação e estilo
+
+Exemplo de resposta factual:
+```
+FalleN, YEKINDAR, molodoy, yuurih e KSCERATO. E o comandante é o guerri. Line pesada demais.
+```
+
+Exemplo de opinião:
+```
+O Fallen, sem dúvidas. É o professor, né? Representa tudo que a FURIA virou hoje.
+```
 
 ---
 
-## 💬 Exemplos de perguntas
+## 🤝 Sobre
 
-- "Qual a lineup de CS2?"
-- "Quem é o técnico do Valorant?"
-- "Quais títulos da FURIA no R6?"
-- "Qual foi a melhor campanha da FURIA?"
-- "Você prefere o FalleN ou o arT?"
-
----
-
-## 🧠 Como funciona
-
-- Se a pergunta for factual → responde da base (`base.json`)  
-- Se for subjetiva → responde com frases opinativas no estilo FURIOSO  
-- Se for informativa mas dinâmica → busca na web com Tavily e envia para o modelo  
-- Todas as respostas passam pelo `estilo_furioso()` com gírias e emojis  
-
----
-
-## 📽️ Demonstração
-
-[⚠️ Link do vídeo aqui se gravado]
-
----
-
-## 🔮 Melhorias futuras
-
-- Adicionar memória longa (ex: com Redis ou MongoDB)  
-- Integração com calendário de jogos em tempo real  
-- Comando /partida ou /agenda com próximos confrontos  
-- Versão web com interface animada  
-
----
+Este projeto foi desenvolvido como parte de um desafio técnico para a FURIA.  
