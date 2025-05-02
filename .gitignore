@@ -1,10 +1,5 @@
-.env
-
 *.log
 __pycache__/
 *.pyc
 
 .vscode/
-
-node_modules/
-.env.local
